@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import VanCard from "../components/VanCard";
+import VanCard from "../../components/VanCard";
 import { nanoid } from "nanoid";
 
 const VanList = () => {
