@@ -18,7 +18,7 @@ const VanList = () => {
       <h1>Explore our van options</h1>
       <div className="van-list">
         {vans.map((van) => (
-          <VanCard key={nanoid()} van={van} />
+          <VanCard key={van.id} van={van} />
         ))}
       </div>
     </div>
