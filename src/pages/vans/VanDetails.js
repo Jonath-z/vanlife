@@ -1,23 +1,24 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React from "react";
+import { Link, useParams } from "react-router-dom";
+export default function VanDetail() {
+  const params = useParams();
+  const [van, setVan] = React.useState(null);
 
-const VanDetails = () => {
-  const { id } = useParams();
-  const [van, setVan] = useState([]);
-
-  useEffect(() => {
-    (async () => {
-      const response = await fetch(`/api/vans/${id}`);
-      const data = await response.json();
-      setVan(data.vans);
-    })();
-  }, [id]);
+  React.useEffect(() => {
+    fetch(`/api/vans/${params.id}`)
+      .then((res) => res.json())
+      .then((data) => setVan(data.vans));
+  }, [params.id]);
 
   return (
     <div className="van-detail-container">
+      <Link to=".." relative="path" className="back-button">
+        &larr; <span>Back to all vans</span>
+      </Link>
+
       {van ? (
         <div className="van-detail">
-          <img src={van.imageUrl} alt="van-datails" />
+          <img src={van.imageUrl} />
           <i className={`van-type ${van.type} selected`}>{van.type}</i>
           <h2>{van.name}</h2>
           <p className="van-price">
@@ -31,6 +32,4 @@ const VanDetails = () => {
       )}
     </div>
   );
-};
-
-export default VanDetails;
+}
